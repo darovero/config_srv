@@ -1,3 +1,16 @@
+##########################################################################
+# This script the initial configuration of a server: name, ip, gateway,  #
+# subnet mask, DNS and disable IPv6.                                     #
+##########################################################################
+
+
+# Variables
+$netname = "Ethernet"
+
+# Start Event Log
+Start-Transcript ("C:\config_srv_Log {0:yyyyMMdd - HHmm}.txt" -f (Get-Date))
+
+#Define Name of the Server
 $nameserver = Read-Host "Enter the name of the server"
 Rename-Computer -NewName $nameserver;
 
@@ -9,7 +22,7 @@ $DNS1 = Read-Host "Type Primary DNS address"
 $DNS2 = Read-Host "Type Secondary DNS address"
 
 #Rename on NIC Adapter
-Rename-NetAdapter -Name "Ethernet" -NewName "LAN"
+Rename-NetAdapter -Name "$netname" -NewName "LAN"
 
 #Disable IPv6 on the NIC adapter
 Disable-NetAdapterBinding -Name "LAN" -ComponentID ms_tcpip6
